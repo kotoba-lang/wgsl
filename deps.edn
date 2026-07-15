@@ -1,10 +1,10 @@
 {:paths ["src"]
  :deps {org.clojure/clojure {:mvn/version "1.11.1"}
         org.clojure/clojurescript {:mvn/version "1.11.132"}
-        ;; canonical impl lives in kami.wgsl (kotoba-lang/webgpu) — see CHANGELOG.md. This also
-        ;; pulls in org-w3-webgpu + expr transitively (webgpu's own deps), so the old direct dep
-        ;; on the standalone ../expr repo is no longer needed here.
-        io.github.kotoba-lang/webgpu {:local/root "../webgpu"}}
+        ;; kami.wgsl is implemented in this package and only delegates expression
+        ;; compilation to kotoba.expr. Do not depend on the WebGPU executor: that
+        ;; would create wgsl → webgpu → shaders → wgsl.
+        io.github.kotoba-lang/expr {:local/root "../expr"}}
  :aliases
  {:test {:extra-paths ["test"]
          :extra-deps {io.github.cognitect-labs/test-runner {:git/tag "v0.5.1" :git/sha "dfb30dd"}}

@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Remove the erroneous dependency on the WebGPU executor. `kami.wgsl` lives in
+  this package and depends only on `kotoba.expr`, avoiding a renderer/shader
+  dependency cycle.
+
 ## Unreleased — 2026-07-09
 
 ### Changed: `kotoba.wgsl` is now a thin re-export of `kami.wgsl` (kotoba-lang/webgpu)
