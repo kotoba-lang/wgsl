@@ -85,6 +85,7 @@
       :++     (str (ident (first xs)) "++;")
       :--     (str (ident (first xs)) "--;")
       :return (if (seq xs) (str "return " (expr (first xs)) ";") "return;")
+      :discard "discard;"
       :if     (str "if (" (expr (first xs)) ") {\n" (block (second xs)) "\n}"
                    (when (> (count xs) 2) (str " else {\n" (block (nth xs 2)) "\n}")))
       :for    (let [[init cnd step & body] xs]
