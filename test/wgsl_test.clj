@@ -22,6 +22,7 @@
   (is (= "var c: vec3<f32> = vec3<f32>(0.0, 0.0, 0.0);" (w/stmt [:var :c :vec3 [:vec3 0.0 0.0 0.0]])) "typed var resolves vec ctor")
   (is (= "var c = vec3<f32>(0.0);" (w/stmt [:var :c [:vec3 0.0]])) "inferred var (no type)")
   (is (= "return vec4<f32>(c, 1.0);" (w/stmt [:return [:vec4 :c 1.0]])))
+  (is (= "discard;" (w/stmt [:discard])))
   (is (str/starts-with? (w/stmt [:if [:> :a 0.0] [[:set :c :a]]]) "if ((a > 0.0)) {")))
 
 (deftest compute-and-storage
@@ -52,4 +53,3 @@
                        [:let :ndl [:max [:dot :N :L] 0.0]]
                        [:return [:vec4 [:* :i.col :ndl] 1.0]]]))
         "deterministic")))
-
