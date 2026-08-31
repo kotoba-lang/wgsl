@@ -2,6 +2,34 @@
 
 ## Unreleased
 
+### Tests run on both runtimes, and the suite is now `.cljc`
+
+The suite was `.clj` — JVM only — while the implementation is `.cljc`. Portability
+was a claim, not an observation, and here it was not an idle one: `kami.wgsl/num`
+floats every integral-looking literal *because ClojureScript cannot tell 0 from
+0.0*, and the two runtimes take different branches through it.
+
+    (str 1e21)   JVM "1.0E21" -> caught by the "." test
+                 CLJS "1e+21" -> only the "e" test stops it becoming "1e+21.0"
+
+The `e` branch is unreachable on the JVM. Deleting it was measured to leave
+`clojure -M:test` at **0 failures** while nbb reports **1 failure** in
+`f32-literal-coercion` — so the old suite would have stayed green forever.
+`run_tests.cljs` now runs nbb first and the JVM after, and refuses (exit 2)
+rather than reporting a pass when the `expr` sources are not on disk.
+
+Coverage went from 4 tests / 22 assertions to 13 / 68. Newly pinned, all
+previously untested: `struct*` and `shader` (re-exported and used by every
+consumer that declares a vertex-output type), the `[:i n]` raw-integer and
+`[:. e field]` swizzle specials, `:set`/`:+=`/`:-=`/`:++`/`:--`/`:decl` and the
+bare-expression fallback, `if`/`else` and nested-block indentation, `for`
+headers, the short WGSL type aliases and string-passthrough types, `@builtin`
+returns, scalar workgroup sizes, stage-less helpers, and that `kotoba.wgsl`
+re-exports all six names of `kami.wgsl` (compared as vars, not as sample output).
+
+
+## Unreleased
+
 - Remove the erroneous dependency on the WebGPU executor. `kami.wgsl` lives in
   this package and depends only on `kotoba.expr`, avoiding a renderer/shader
   dependency cycle.

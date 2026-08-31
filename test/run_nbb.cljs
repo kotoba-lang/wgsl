@@ -1,0 +1,14 @@
+;; test/run_nbb.cljs — the ClojureScript half of the suite.
+;;
+;; Spawned by `run_tests.cljs` with a classpath that includes `kotoba.expr`.
+;; It is a separate file because nbb fixes its classpath at startup: the driver
+;; cannot require `wgsl-test` and *then* decide where `expr` lives.
+(ns run-nbb
+  (:require [clojure.test :as t]
+            [wgsl-test]))
+
+(defmethod t/report [:cljs.test/default :end-run-tests] [m]
+  (when-not (t/successful? m)
+    (js/process.exit 1)))
+
+(t/run-tests 'wgsl-test)
