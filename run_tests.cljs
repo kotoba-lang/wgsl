@@ -25,7 +25,7 @@
             ["node:os" :as os]
             ["node:path" :as path]
             [clojure.edn :as edn]
-            [clojure.string :as str]))
+            [kotoba.lang.text :as str]))
 
 (def green-marker
   "maturity-loop の `:green-marker`。**両方**緑のときだけ出る。"
