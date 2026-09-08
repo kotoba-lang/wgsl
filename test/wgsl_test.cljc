@@ -14,7 +14,7 @@
    So the `e` branch is unreachable on the JVM. A JVM-only suite cannot observe it at all, and
    deleting it would stay green forever. See `f32-literal-coercion` below."
   (:require [clojure.test :refer [deftest is]]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [kami.wgsl :as k]
             [kotoba.wgsl :as w]))
 
@@ -46,7 +46,7 @@
   ;; two runtimes legitimately spell the exponent differently.
   (let [s (w/expr 1e21)]
     (is (not (str/ends-with? s ".0")) "exponent literal must not gain a second suffix")
-    (is (str/includes? (str/lower-case s) "e") "exponent literal keeps exponent form")))
+    (is (str/includes? (str/lower s) "e") "exponent literal keeps exponent form")))
 
 (deftest swizzle-on-a-sub-expression
   ;; [:. e field] is the WGSL-specific special: a field or swizzle applied to a
