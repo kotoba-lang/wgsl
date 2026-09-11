@@ -13,7 +13,7 @@ floats every integral-looking literal *because ClojureScript cannot tell 0 from
                  CLJS "1e+21" -> only the "e" test stops it becoming "1e+21.0"
 
 The `e` branch is unreachable on the JVM. Deleting it was measured to leave
-`clojure -M:test` at **0 failures** while nbb reports **1 failure** in
+`kbb -M:test` at **0 failures** while nbb reports **1 failure** in
 `f32-literal-coercion` — so the old suite would have stayed green forever.
 `run_tests.cljk` now runs nbb first and the JVM after, and refuses (exit 2)
 rather than reporting a pass when the `expr` sources are not on disk.
@@ -53,7 +53,7 @@ typed constructors) is byte-identical between the two. What differed was develop
   shader as data (struct/bindings/shadow/vertex/fragment), the shared `kotoba.expr`/`expr.core`
   split (ADR-2607051500), Phase 3 compute+storage support, EDN-ifying `kami-render` shaders, and a
   real-binary WGSL validation gate via `naga` (wgpu's own WGSL front-end) wired into
-  `bb gen-glsl`/`bb gen-wgsl`.
+  `kbb -M:gen-glsl`/`kbb -M:gen-wgsl`.
 - This repo's copy (`src/kotoba/wgsl.cljk`, restore commit `0779e52`) already contained that mature
   implementation as a snapshot at restore time, but has had **zero commits since** beyond CI/lint
   housekeeping (`ci: add clj test workflow`, `ci: fix broken sibling checkout`, `ci: add clj-kondo

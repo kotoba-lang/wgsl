@@ -10,5 +10,5 @@
 Depends only on `expr` (shared infix core). No browser/WebGPU deps.
 
 ```sh
-clojure -M:test
+kbb -M:test
 ```

@@ -1,7 +1,7 @@
-#!/usr/bin/env nbb
+#!/usr/bin/env kbb
 ;; run_tests.cljk — run the same suite on **both** runtimes.
 ;;
-;;   nbb run_tests.cljk
+;;   kbb --backend sci run_tests.cljk
 ;;
 ;; The implementation is `.cljc`, and until 2026-08-31 the suite was `.clj`:
 ;; JVM only. Portability was therefore a claim, not an observation — and here it
@@ -53,7 +53,7 @@
     (println (str/trim (str (.-stdout r) (.-stderr r))))
     (zero? (or (.-status r) 1))))
 
-(def jvm-cmd ["clojure" "-M:test"])
+(def jvm-cmd ["kbb" "-M:test"])
 
 ;; The JVM run is what populates ~/.gitlibs. On a cold machine nbb therefore has
 ;; nothing to require, so resolve first and fall back to running the JVM half
@@ -77,7 +77,7 @@
   (js/process.exit 2))
 
 (def nbb-green?
-  (run "nbb" ["nbb" "--classpath" (str/join ":" ["src" "test" resolved])
+  (run "nbb" ["kbb" "--backend" "sci" "--classpath" (str/join ":" ["src" "test" resolved])
               "test/run_nbb.cljk"]))
 
 (def jvm-green? (if jvm-first? jvm-green-early (run "JVM" jvm-cmd)))
