@@ -4,7 +4,7 @@
    statements, and a real lighting fragment function. The compiler being .cljc, this same source is
    what the browser (shadow-cljs) emits, so the test guards the live shader too.
 
-   This file is `.cljc` and is run on **both** runtimes by `run_tests.cljs` (nbb first, JVM after).
+   This file is `.cljc` and is run on **both** runtimes by `run_tests.cljk` (nbb first, JVM after).
    That is not decoration. `kami.wgsl/num` floats every integral-looking literal precisely because
    ClojureScript cannot tell 0 from 0.0, and the two runtimes take *different branches* through it:
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env nbb
-;; run_tests.cljs — run the same suite on **both** runtimes.
+;; run_tests.cljk — run the same suite on **both** runtimes.
 ;;
-;;   nbb run_tests.cljs
+;;   nbb run_tests.cljk
 ;;
 ;; The implementation is `.cljc`, and until 2026-08-31 the suite was `.clj`:
 ;; JVM only. Portability was therefore a claim, not an observation — and here it
@@ -78,7 +78,7 @@
 
 (def nbb-green?
   (run "nbb" ["nbb" "--classpath" (str/join ":" ["src" "test" resolved])
-              "test/run_nbb.cljs"]))
+              "test/run_nbb.cljk"]))
 
 (def jvm-green? (if jvm-first? jvm-green-early (run "JVM" jvm-cmd)))
 
