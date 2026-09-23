@@ -13,7 +13,7 @@
 
    So the `e` branch is unreachable on the JVM. A JVM-only suite cannot observe it at all, and
    deleting it would stay green forever. See `f32-literal-coercion` below."
-  (:require [clojure.test :refer [deftest is]]
+  (:require [kotoba.test :refer [deftest is]]
             [kotoba.lang.text :as str]
             [kami.wgsl :as k]
             [kotoba.wgsl :as w]))
