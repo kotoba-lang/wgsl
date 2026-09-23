@@ -25,7 +25,7 @@
 ;; own :nonexistent-law self-test, which needs no register entry.
 
 (ns mutation-check
-  (:require [clojure.edn :as edn]
+  (:require [kotoba.lang.edn :as edn]
             [kotoba.lang.text :as str]
             [promesa.core :as p]
             ["fs" :as fs]
