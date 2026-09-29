@@ -17,7 +17,7 @@
 ;; The `e` branch is unreachable on the JVM. Deleting it would have stayed green
 ;; forever. Same hole as `kotoba-lang/codebase`'s f64 decode.
 ;;
-;; nbb runs first (this workspace's first runtime, CLAUDE.md); the JVM follows
+;; nbb runs first (this workspace's first runtime, AGENTS.md); the JVM follows
 ;; as the compatibility check.
 (ns run-tests
   (:require ["node:child_process" :as cp]
@@ -70,7 +70,7 @@
 (when-not (and resolved (fs/existsSync resolved))
   ;; Refuse rather than pass. A suite that could not run must not exit 0 — that
   ;; is the shape where "not measured" is indistinguishable from "measured and
-  ;; fine" (CLAUDE.md: 検査を書く前・緑を信じる前の 6 問).
+  ;; fine" (AGENTS.md: 検査を書く前・緑を信じる前の 6 問).
   (println (str "\nwgsl: REFUSING to report a pass — expr sources are not on disk"
                 (when resolved (str " (" resolved ")"))
                 "\n  run `clojure -P` once to resolve deps.edn git coordinates."))
